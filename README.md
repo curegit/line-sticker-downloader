@@ -19,8 +19,6 @@ Download as zip and extract to any web directory
 4. Wait
 5. Click "Download" link
 
-![store_screen.png](store_screen.png)
-
 ### Note
 
 The document size of the download page would be huge because the PHP program outputs a lot of dammy data so that a server sends document data continuously and a browser refresh the screen.
