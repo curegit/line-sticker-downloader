@@ -9,7 +9,7 @@ Download sample images and assets from the store
 
 ## Install
 
-Download as zip and extract to any web directory
+Download zip and extract to any web directory
 
 ## Usage
 
