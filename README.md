@@ -2,6 +2,8 @@
 
 Download images and assets from LINE Store
 
+Those resources are located in public web directory, so anyone can get them easily
+
 ## Requirements
 
 - PHP7 (CGI)
