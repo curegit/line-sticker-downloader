@@ -1,6 +1,6 @@
 # Line Sticker Downloader
 
-Download sample images and assets from the store
+Download images and assets from LINE Store
 
 ## Requirements
 
