@@ -11,8 +11,5 @@
       <input type="submit" value="Download">
     </form>
     <p>Download sample images from the store</p>
-    <p>
-      <img src="./store_screen.png" alt="Line Store" style="width: 880px; border: solid 1px #999;">
-    </p>
   </body>
 </html>
