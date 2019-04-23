@@ -23,4 +23,4 @@ Download zip and extract it to any web directory (Personal server recommended)
 
 ### Note
 
-The document size of a download page would be huge because the PHP program outputs a lot of dummy data so that a server sends document data continuously and a browser refresh the screen.
+The document size of a download page would be large because the PHP program outputs a lot of dummy data so that a server sends document data continuously and a browser refresh the screen.

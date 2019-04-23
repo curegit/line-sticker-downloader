@@ -175,7 +175,7 @@ function h($html) {
 }
 // Console-like print
 function print_buffer($str) {
-  echo "    <!-- dammy data: ".str_pad("", 45000, "アイ！カツ！")." -->\n"; // Send dummy to force browser to render
+  echo "    <!-- dammy data: ".str_pad("", 4096, "アイ！カツ！")." -->\n"; // Send dummy to force browser to render
   echo "    <script>document.getElementById('console').insertAdjacentHTML('beforeEnd', '$str<br>');</script>\n";
   ob_flush();
   flush();
