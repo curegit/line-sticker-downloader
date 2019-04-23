@@ -2,7 +2,7 @@
 
 Download images and assets from LINE Store
 
-Those resources are located in public web directory, so anyone can get them easily
+Those resources are located in public web directory, so anyone can get them easily and legally (Private use only)
 
 ## Requirements
 
@@ -11,7 +11,7 @@ Those resources are located in public web directory, so anyone can get them easi
 
 ## Install
 
-Download zip and extract to any web directory
+Download zip and extract to any web directory (Personal server recommended)
 
 ## Usage
 
