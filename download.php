@@ -13,7 +13,7 @@ if ($id < 1) {
 }
 // Verify param
 if ($id < 1) {
-  header('Content-Type: text/plain; charset=UTF-8', true, 400);
+  header("Content-Type: text/plain; charset=UTF-8", true, 400);
   echo "ID '$id' is out of range.\n";
   die(1);
 }
@@ -21,7 +21,7 @@ if ($id < 1) {
 $json = @file_get_contents("http://dl.stickershop.line.naver.jp/products/0/0/1/$id/iphone/productInfo.meta");
 // Verify ID
 if (empty($json)) {
-  header('Content-Type: text/plain; charset=UTF-8', true, 400);
+  header("Content-Type: text/plain; charset=UTF-8", true, 400);
   echo "ID '$id' does not exist.\n";
   die(1);
 }
@@ -64,7 +64,7 @@ if (!$cli) {
   // Disable compression
   @ini_set("zlib.output_compression", 0);
   // Tell not to use cache
-  header('Content-type: text/html; charset=utf-8');
+  header("Content-type: text/html; charset=utf-8");
   header("Cache-Control: no-cache, must-revalidate");
   header("X-Accel-Buffering: no");
 }
