@@ -1,79 +1,109 @@
 <?php
+// Cache days
+const Cache = 30;
 // Memory start time
 $start_time = microtime(true);
-// Get param
+// Get param (CGI)
 $id = (int)filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
+$cli = false; // Global
+// CLI args
+if ($id < 1) {
+  $id = (int)filter_var($argv[1] ?? 0, FILTER_VALIDATE_INT);
+  $cli = true; // Global
+}
 // Verify param
 if ($id < 1) {
   header('Content-Type: text/plain; charset=UTF-8', true, 400);
-  die("ID '$id' is out of range.\n");
+  echo "ID '$id' is out of range.\n";
+  die(1);
 }
 // Get JSON
 $json = @file_get_contents("http://dl.stickershop.line.naver.jp/products/0/0/1/$id/iphone/productInfo.meta");
 // Verify ID
 if (empty($json)) {
   header('Content-Type: text/plain; charset=UTF-8', true, 400);
-  die("ID '$id' does not exist.\n");
+  echo "ID '$id' does not exist.\n";
+  die(1);
 }
 // Decode JSON
 $package_info = json_decode($json, true);
 // Construct filename and save destination
-$filepath = "./caches/$id.1.linestk.zip";
+$cachedir = __DIR__."/caches";
+$filepath = "$cachedir/$id.1.linestk.zip";
 $filename = basename($filepath);
+$webpath = "caches/$filename";
 // Make cache dir
-if (!file_exists("./caches")) {
-  mkdir("./caches");
+if (!file_exists($cachedir)) {
+  mkdir($cachedir);
 }
 // Change permission
-chmod("./caches", 0777);
+chmod($cachedir, 0777);
 // Output and exit if there is the data in cache dir
 if (file_exists($filepath) === true) {
-  header("Content-Type: application/zip; name=\"$filename\"");
-  header("Content-Disposition: attachment; filename=\"$filename\"");
-  header("Content-Length: ".filesize($filepath));
-  echo file_get_contents($filepath);
-  exit;
+  // CLI
+  if ($cli) {
+    print_line("Cache exists");
+    print_line("Saved");
+  // CGI
+  } else {
+    header("Content-Type: application/zip; name=\"$filename\"");
+    header("Content-Disposition: attachment; filename=\"$filename\"");
+    header("Content-Length: ".filesize($filepath));
+    echo file_get_contents($filepath);
+  }
+  exit(0);
 }
-// Set time limit on 5 minutes (No effects in safe mode)
-set_time_limit(300);
-// Continue even if browser goes back
-ignore_user_abort(1);
-// Prevent PHP buffering (Helpless to change server settings)
-@ini_set("output_buffering", 0);
-// Disable compression
-@ini_set("zlib.output_compression", 0);
-// Tell not to use cache
-header('Content-type: text/html; charset=utf-8');
-header("Cache-Control: no-cache, must-revalidate");
-header("X-Accel-Buffering: no");
-// Start flushing
-@ob_end_flush();
-ob_start();
-?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Download | Line Sticker Downloader</title>
-  </head>
-  <body>
-    <h1>Download 「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1>
-    <p class="download_link"></p>
-    <p id="console" style="width: 100%; color: #FFF; background-color: #000;">
-    </p>
-    <p class="download_link"></p>
-    <p><a href="./">Back</a></p>
-<?php
-print_buffer("start...");
-print_buffer("Target ID: $id");
-ob_flush();
-flush();
+// Tricks for CGI
+if (!$cli) {
+  // Set time limit on 5 minutes (No effects in safe mode)
+  set_time_limit(300);
+  // Continue even if browser goes back
+  ignore_user_abort(1);
+  // Prevent PHP buffering (Helpless to change server settings)
+  @ini_set("output_buffering", 0);
+  // Disable compression
+  @ini_set("zlib.output_compression", 0);
+  // Tell not to use cache
+  header('Content-type: text/html; charset=utf-8');
+  header("Cache-Control: no-cache, must-revalidate");
+  header("X-Accel-Buffering: no");
+}
+// CLI mode
+if ($cli) {
+  print_line(($package_info["title"]["ja"] ?? "日本語名なし")." (".($package_info["title"]["en"] ?? "No English name available").")");
+  print_line("start...");
+  print_line("Target ID: $id");
+// CGI mode
+} else {
+  // Start flushing
+  @ob_end_flush();
+  ob_start();
+  ?>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Download | Line Sticker Downloader</title>
+    </head>
+    <body>
+      <h1>Download 「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1>
+  　　 <p class="download_link"></p>
+ 　　  <p id="console" style="width: 100%; color: #FFF; background-color: #000;">
+ 　　　</p>
+　　   <p class="download_link"></p>
+  　　 <p><a href="./">Back</a></p>
+  <?php
+  print_line("start...");
+  print_line("Target ID: $id");
+  ob_flush();
+  flush();
+}
 // Make Zip object
 $zip = new ZipArchive();
 $result = $zip->open($filepath, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
 // If it failed to make zip
 if ($result !== true) {
-  print_buffer("Failed to create zip");
+  print_line("Failed to create zip");
 // If it made zip successfully
 } else {
   // Check additional contents
@@ -144,42 +174,57 @@ if ($result !== true) {
     }
   }
   $zip->close();
-  print_buffer("Saved: $filepath");
+  print_line("Saved: $filepath");
   $elapsed_time = microtime(true) - $start_time;
-  print_buffer("{$elapsed_time} sec");
-  print_buffer("Ready to download");
-  // Print download link
-  echo "    <script>var es = document.getElementsByClassName('download_link'); for(var i = 0; i < es.length; i++) { es[i].innerHTML = '<a href=\"{$filepath}\">Download</a>'; }</script>\n";
-  ob_flush();
-  flush();
+  print_line("{$elapsed_time} sec");
+  if (!$cli) {
+    print_line("Ready to download");
+  }
+  // Copy to target dir (CLI)
+  if ($cli) {
+    print_line("Saved to: $filepath"); // TODO
+  // Print download link (CGI)
+  } else {
+    echo "    <script>var es = document.getElementsByClassName('download_link'); for(var i = 0; i < es.length; i++) { es[i].innerHTML = '<a href=\"{$webpath}\">Download</a>'; }</script>\n";
+    ob_flush();
+    flush();
+  }
 }
 // Delete outdated caches
-$caches = glob("./caches/*.zip");
+$caches = glob("$cachedir/*.zip");
 foreach($caches as $cache){
   if(is_file($cache)) {
-    if (time() - filemtime($cache) > 60 * 60 * 24 * 30) {
+    if (time() - filemtime($cache) > 60 * 60 * 24 * Cache) {
       if (@unlink($cache)) {
-        print_buffer("Server cache cleaned: $cache");
+        print_line("Server cache cleaned: $cache");
       }
     }
   }
 }
+// End of document
+if (!$cli) {
 ?>
   </body>
 </html>
 <?php
-ob_flush();
-flush();
+  ob_flush();
+  flush();
+}
 // Sanitize HTML
 function h($html) {
   return htmlspecialchars($html, ENT_QUOTES, "UTF-8");
 }
 // Console-like print
-function print_buffer($str) {
-  echo "    <!-- dummy data: ".str_pad("", 3600, "アイ！カツ！")." -->\n"; // Send dummy to force browser to render
-  echo "    <script>document.getElementById('console').insertAdjacentHTML('beforeEnd', '$str<br>');</script>\n";
-  ob_flush();
-  flush();
+function print_line($str) {
+  global $cli;
+  if ($cli) {
+    echo "$str\n";
+  } else {
+    echo "    <!-- dummy data: ".str_pad("", 3600, "アイ！カツ！")." -->\n"; // Send dummy to force browser to render
+    echo "    <script>document.getElementById('console').insertAdjacentHTML('beforeEnd', '$str<br>');</script>\n";
+    ob_flush();
+    flush();
+  }
 }
 // Add downloaded content to zip and print progress
 function add_file_to_zip($zip, $filename, $url) {
@@ -187,13 +232,13 @@ function add_file_to_zip($zip, $filename, $url) {
   $file_count++;
   $content = @file_get_contents($url);
   if ($content === false) {
-    print_buffer("None: $filename ($file_count)");
+    print_line("None: $filename ($file_count)");
   } else {
     $result = $zip->addFromString($filename, $content);
     if ($result === true) {
-      print_buffer("Done: $filename ($file_count)");
+      print_line("Done: $filename ($file_count)");
     } else {
-      print_buffer("Failed: $filename ($file_count)");
+      print_line("Failed: $filename ($file_count)");
     }
   }
 }
