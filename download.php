@@ -40,8 +40,8 @@ chmod("./caches", 0777);
 if (file_exists($filepath) === true) {
   // CLI
   if ($cli) {
-    print_buffer("Cache exists");
-    print_buffer("Saved");
+    print_line("Cache exists");
+    print_line("Saved");
   // CGI
   } else {
     header("Content-Type: application/zip; name=\"$filename\"");
@@ -68,9 +68,9 @@ if (!$cli) {
 }
 // CLI mode
 if ($cli) {
-  print_buffer(($package_info["title"]["ja"] ?? "日本語名なし")." (".($package_info["title"]["en"] ?? "No English name available").")");
-  print_buffer("start...");
-  print_buffer("Target ID: $id");
+  print_line(($package_info["title"]["ja"] ?? "日本語名なし")." (".($package_info["title"]["en"] ?? "No English name available").")");
+  print_line("start...");
+  print_line("Target ID: $id");
 // CGI mode
 } else {
   // Start flushing
@@ -90,8 +90,8 @@ if ($cli) {
       <p id="download_link"></p>
       <p><a href="./">Back</a></p>
   <?php
-  print_buffer("start...");
-  print_buffer("Target ID: $id");
+  print_line("start...");
+  print_line("Target ID: $id");
   ob_flush();
   flush();
 }
@@ -100,7 +100,7 @@ $zip = new ZipArchive();
 $result = $zip->open($filepath, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
 // If it failed to make zip
 if ($result !== true) {
-  print_buffer("Failed to create zip");
+  print_line("Failed to create zip");
 // If it made zip successfully
 } else {
   // Check additional contents
@@ -171,13 +171,13 @@ if ($result !== true) {
     }
   }
   $zip->close();
-  print_buffer("Saved: $filepath");
+  print_line("Saved: $filepath");
   $elapsed_time = microtime(true) - $start_time;
-  print_buffer("{$elapsed_time} sec");
-  print_buffer("Ready to download");
+  print_line("{$elapsed_time} sec");
+  print_line("Ready to download");
   // Copy to target dir (CLI)
   if ($cli) {
-    print_buffer("Saved to: $filepath"); // TODO
+    print_line("Saved to: $filepath"); // TODO
   // Print download link (CGI)
   } else {
     echo "    <script>document.getElementById('download_link').innerHTML = '<a href=\"{$filepath}\">Download</a>';</script>\n";
@@ -191,7 +191,7 @@ foreach($caches as $cache){
   if(is_file($cache)) {
     if (time() - filemtime($cache) > 60 * 60 * 24 * Cache) {
       if (@unlink($cache)) {
-        print_buffer("Server cache cleaned: $cache");
+        print_line("Server cache cleaned: $cache");
       }
     }
   }
@@ -210,7 +210,7 @@ function h($html) {
   return htmlspecialchars($html, ENT_QUOTES, "UTF-8");
 }
 // Console-like print
-function print_buffer($str) {
+function print_line($str) {
   global $cli;
   if ($cli) {
     echo "$str\n";
@@ -227,13 +227,13 @@ function add_file_to_zip($zip, $filename, $url) {
   $file_count++;
   $content = @file_get_contents($url);
   if ($content === false) {
-    print_buffer("None: $filename ($file_count)");
+    print_line("None: $filename ($file_count)");
   } else {
     $result = $zip->addFromString($filename, $content);
     if ($result === true) {
-      print_buffer("Done: $filename ($file_count)");
+      print_line("Done: $filename ($file_count)");
     } else {
-      print_buffer("Failed: $filename ($file_count)");
+      print_line("Failed: $filename ($file_count)");
     }
   }
 }
