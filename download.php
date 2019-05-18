@@ -87,10 +87,11 @@ if ($cli) {
     </head>
     <body>
       <h1>Download 「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1>
-      <p id="console" style="width: 100%; color: #FFF; background-color: #000;">
-      </p>
-      <p id="download_link"></p>
-      <p><a href="./">Back</a></p>
+  　　 <p class="download_link"></p>
+ 　　  <p id="console" style="width: 100%; color: #FFF; background-color: #000;">
+ 　　　</p>
+　　   <p class="download_link"></p>
+  　　 <p><a href="./">Back</a></p>
   <?php
   print_line("start...");
   print_line("Target ID: $id");
@@ -184,7 +185,7 @@ if ($result !== true) {
     print_line("Saved to: $filepath"); // TODO
   // Print download link (CGI)
   } else {
-    echo "    <script>document.getElementById('download_link').innerHTML = '<a href=\"{$webpath}\">Download</a>';</script>\n";
+    echo "    <script>var es = document.getElementsByClassName('download_link'); for(var i = 0; i < es.length; i++) { es[i].innerHTML = '<a href=\"{$webpath}\">Download</a>'; }</script>\n";
     ob_flush();
     flush();
   }
