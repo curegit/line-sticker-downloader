@@ -28,14 +28,16 @@ if (empty($json)) {
 // Decode JSON
 $package_info = json_decode($json, true);
 // Construct filename and save destination
-$filepath = "./caches/$id.1.linestk.zip";
+$cachedir = __DIR__."/caches";
+$filepath = "$cachedir/$id.1.linestk.zip";
 $filename = basename($filepath);
+$webpath = "caches/$filename";
 // Make cache dir
-if (!file_exists("./caches")) {
-  mkdir("./caches");
+if (!file_exists($cachedir)) {
+  mkdir($cachedir);
 }
 // Change permission
-chmod("./caches", 0777);
+chmod($cachedir, 0777);
 // Output and exit if there is the data in cache dir
 if (file_exists($filepath) === true) {
   // CLI
@@ -174,19 +176,21 @@ if ($result !== true) {
   print_line("Saved: $filepath");
   $elapsed_time = microtime(true) - $start_time;
   print_line("{$elapsed_time} sec");
-  print_line("Ready to download");
+  if (!$cli) {
+    print_line("Ready to download");
+  }
   // Copy to target dir (CLI)
   if ($cli) {
     print_line("Saved to: $filepath"); // TODO
   // Print download link (CGI)
   } else {
-    echo "    <script>document.getElementById('download_link').innerHTML = '<a href=\"{$filepath}\">Download</a>';</script>\n";
+    echo "    <script>document.getElementById('download_link').innerHTML = '<a href=\"{$webpath}\">Download</a>';</script>\n";
     ob_flush();
     flush();
   }
 }
 // Delete outdated caches
-$caches = glob("./caches/*.zip");
+$caches = glob("$cachedir/*.zip");
 foreach($caches as $cache){
   if(is_file($cache)) {
     if (time() - filemtime($cache) > 60 * 60 * 24 * Cache) {
