@@ -206,8 +206,8 @@ if (!$cli) {
   </body>
 </html>
 <?php
-ob_flush();
-flush();
+  ob_flush();
+  flush();
 }
 // Sanitize HTML
 function h($html) {
