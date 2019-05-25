@@ -1,5 +1,5 @@
 <?php
-// Cache days
+// Cache days (set 0 to disable caching)
 const Cache = 30;
 // Memory start time
 $start_time = microtime(true);
@@ -29,7 +29,7 @@ if (empty($json)) {
 $package_info = json_decode($json, true);
 // Construct filename and save destination
 $cachedir = __DIR__."/caches";
-$filepath = "$cachedir/$id.1.linestk.zip";
+$filepath = Cache !== 0 || !cli ? "$cachedir/$id.1.linestk.zip" : "./$id.1.linestk.zip";
 $filename = basename($filepath);
 $webpath = "caches/$filename";
 // Make cache dir
@@ -39,19 +39,21 @@ if (!file_exists($cachedir)) {
 // Change permission
 chmod($cachedir, 0777);
 // Output and exit if there is the data in cache dir
-if (file_exists($filepath) === true) {
-  // CLI
-  if ($cli) {
-    print_line("Cache exists");
-    print_line("Saved");
-  // CGI
-  } else {
-    header("Content-Type: application/zip; name=\"$filename\"");
-    header("Content-Disposition: attachment; filename=\"$filename\"");
-    header("Content-Length: ".filesize($filepath));
-    echo file_get_contents($filepath);
+if (Cache !== 0) {
+  if (file_exists($filepath) === true) {
+    // CLI
+    if ($cli) {
+      print_line("Cache exists");
+      print_line("Saved");
+    // CGI
+    } else {
+      header("Content-Type: application/zip; name=\"$filename\"");
+      header("Content-Disposition: attachment; filename=\"$filename\"");
+      header("Content-Length: ".filesize($filepath));
+      echo file_get_contents($filepath);
+    }
+    exit(0);
   }
-  exit(0);
 }
 // Tricks for CGI
 if (!$cli) {
