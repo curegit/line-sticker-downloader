@@ -31,9 +31,10 @@ $package_info = json_decode($json, true);
 // Construct filename and save destination
 $cachedir = __DIR__."/caches";
 $clipath = ($savepath ?? "") === "" ? "$id.1.linestk.zip" : $savepath;
-$filepath = Cache !== 0 || !cli ? "$cachedir/$id.1.linestk.zip" : ($clipath === "" ? "$id.1.linestk.zip" : $clipath);
+$filepath = Cache !== 0 || !cli ? "$cachedir/$id.1.linestk.zip" : $clipath;
 $filename = basename($filepath);
 $webpath = "caches/$filename";
+$cachepath = "$cachedir/$filename";
 // Make cache dir
 if (!file_exists($cachedir)) {
   @mkdir($cachedir);
@@ -42,17 +43,18 @@ if (!file_exists($cachedir)) {
 @chmod($cachedir, 0777);
 // Output and exit if there is the data in cache dir
 if (Cache !== 0) {
-  if (file_exists($filepath) === true) {
+  if (file_exists($cachepath) === true) {
     // CLI
     if ($cli) {
       print_line("Cache exists");
-      print_line("Saved");
+      copy($cachepath, $clipath);
+      print_line("Saved: $clipath");
     // CGI
     } else {
       header("Content-Type: application/zip; name=\"$filename\"");
       header("Content-Disposition: attachment; filename=\"$filename\"");
-      header("Content-Length: ".filesize($filepath));
-      echo file_get_contents($filepath);
+      header("Content-Length: ".filesize($cachepath));
+      echo file_get_contents($cachepath);
     }
     exit(0);
   }
@@ -178,7 +180,9 @@ if ($result !== true) {
     }
   }
   $zip->close();
-  print_line("Saved: $filepath");
+  if (Cache !== 0) {
+    print_line("Cache saved: $filepath");
+  }
   $elapsed_time = microtime(true) - $start_time;
   print_line("{$elapsed_time} sec");
   if (!$cli) {
@@ -187,10 +191,10 @@ if ($result !== true) {
   // Copy to target dir (CLI)
   if ($cli) {
     if (Cache === 0) {
-      print_line("Saved to: $filepath");
+      print_line("Saved: $clipath");
     } else {
       copy($filepath, $clipath);
-      print_line("Saved to: $clipath");
+      print_line("Saved: $clipath");
     }
   // Print download link (CGI)
   } else {
