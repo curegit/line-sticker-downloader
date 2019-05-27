@@ -10,6 +10,7 @@ $cli = false; // Global
 if ($id < 1) {
   $id = (int)filter_var($argv[1] ?? 0, FILTER_VALIDATE_INT);
   $cli = true; // Global
+  $savepath = (string)filter_var($argv[2] ?? "");
 }
 // Verify param
 if ($id < 1) {
@@ -29,7 +30,8 @@ if (empty($json)) {
 $package_info = json_decode($json, true);
 // Construct filename and save destination
 $cachedir = __DIR__."/caches";
-$filepath = Cache !== 0 || !cli ? "$cachedir/$id.1.linestk.zip" : "./$id.1.linestk.zip";
+$clipath = ($savepath ?? "") === "" ? "$id.1.linestk.zip" : $savepath;
+$filepath = Cache !== 0 || !cli ? "$cachedir/$id.1.linestk.zip" : ($clipath === "" ? "$id.1.linestk.zip" : $clipath);
 $filename = basename($filepath);
 $webpath = "caches/$filename";
 // Make cache dir
@@ -184,7 +186,12 @@ if ($result !== true) {
   }
   // Copy to target dir (CLI)
   if ($cli) {
-    print_line("Saved to: $filepath"); // TODO
+    if (Cache === 0) {
+      print_line("Saved to: $filepath");
+    } else {
+      copy($filepath, $clipath);
+      print_line("Saved to: $clipath");
+    }
   // Print download link (CGI)
   } else {
     echo "    <script>var es = document.getElementsByClassName('download_link'); for(var i = 0; i < es.length; i++) { es[i].innerHTML = '<a href=\"{$webpath}\">Download</a>'; }</script>\n";
