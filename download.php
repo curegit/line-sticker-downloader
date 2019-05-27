@@ -194,7 +194,7 @@ if ($result !== true) {
     }
   // Print download link (CGI)
   } else {
-    echo "    <script>var es = document.getElementsByClassName('download_link'); for(var i = 0; i < es.length; i++) { es[i].innerHTML = '<a href=\"{$webpath}\">Download</a>'; }</script>\n";
+    echo "    <script>var es = document.getElementsByClassName('download_link'); for(var i = 0; i < es.length; i++) { es[i].innerHTML = '<a href=\"{$webpath}\" download>Download</a>'; }</script>\n";
     ob_flush();
     flush();
   }
