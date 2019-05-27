@@ -73,7 +73,7 @@ if (!$cli) {
 // CLI mode
 if ($cli) {
   print_line(($package_info["title"]["ja"] ?? "日本語名なし")." (".($package_info["title"]["en"] ?? "No English name available").")");
-  print_line("start...");
+  print_line("Start...");
   print_line("Target ID: $id");
 // CGI mode
 } else {
@@ -95,7 +95,7 @@ if ($cli) {
       <p class="download_link"></p>
       <p><a href="./">Back</a></p>
   <?php
-  print_line("start...");
+  print_line("Start...");
   print_line("Target ID: $id");
   ob_flush();
   flush();
