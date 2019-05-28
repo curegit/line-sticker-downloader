@@ -31,7 +31,7 @@ $package_info = json_decode($json, true);
 // Construct filename and save destination
 $cachedir = __DIR__."/caches";
 $clipath = ($savepath ?? "") === "" ? "$id.1.linestk.zip" : $savepath;
-$filepath = Cache !== 0 || !cli ? "$cachedir/$id.1.linestk.zip" : $clipath;
+$filepath = Cache !== 0 || !$cli ? "$cachedir/$id.1.linestk.zip" : $clipath;
 $filename = basename($filepath);
 $webpath = "caches/$filename";
 $cachepath = "$cachedir/$filename";
