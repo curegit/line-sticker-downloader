@@ -24,6 +24,12 @@ Download zip and extract it to any web directory (Personal server recommended)
 4. Wait
 5. Click "Download" link
 
+### Tips
+
+for ((i=1000; i<1050; i++)); do php download.php $i; done
+
+
+
 ### Note
 
 The document size of a download page would be large because the PHP program outputs a lot of dummy data so that a server sends document data continuously and a browser refresh the screen.
