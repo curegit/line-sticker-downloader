@@ -9,6 +9,9 @@ Those resources are located in public web directories, so anyone can get them ea
 - PHP7 (CGI)
   - Zip
 
+debian example
+`sudo apt install php-cli php-zip`
+
 ## Install
 
 Download zip and extract it to any web directory (Personal server recommended)
