@@ -122,6 +122,7 @@ $zip = new ZipArchive();
 $result = @$zip->open($filepath, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
 // If it failed to make zip
 if ($result !== true) {
+  $e = 1;
   print_line("Failed to create zip");
 // If it made zip successfully
 } else {
@@ -194,6 +195,7 @@ if ($result !== true) {
   }
   // Saving
   if (@$zip->close() === false) {
+    $e = 1;
     print_line("Failed to save zip");
   } else {
     if (Cache !== 0) {
@@ -210,6 +212,7 @@ if ($result !== true) {
         print_line("Saved: $clipath");
       } else {
         if (@copy($filepath, $clipath) === false) {
+          $e = 1;
           print_line("Failed to save zip");
         } else {
           print_line("Saved: $clipath");
@@ -243,6 +246,7 @@ if (!$cli) {
   ob_flush();
   flush();
 }
+return ($e ?? 0);
 // Sanitize HTML
 function h($html) {
   return htmlspecialchars($html, ENT_QUOTES, "UTF-8");
