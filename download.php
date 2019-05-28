@@ -47,7 +47,10 @@ if (Cache !== 0) {
     // CLI
     if ($cli) {
       print_line("Cache exists");
-      copy($cachepath, $clipath);
+      if (@copy($cachepath, $clipath) === false) {
+        print_line("Failed to save zip");
+        die(1);
+      }
       print_line("Saved: $clipath");
     // CGI
     } else {
@@ -106,7 +109,7 @@ if ($cli) {
 }
 // Make Zip object
 $zip = new ZipArchive();
-$result = $zip->open($filepath, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+$result = @$zip->open($filepath, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
 // If it failed to make zip
 if ($result !== true) {
   print_line("Failed to create zip");
@@ -179,28 +182,35 @@ if ($result !== true) {
       }
     }
   }
-  $zip->close();
-  if (Cache !== 0) {
-    print_line("Cache saved: $filepath");
-  }
-  $elapsed_time = microtime(true) - $start_time;
-  print_line("{$elapsed_time} sec");
-  if (!$cli) {
-    print_line("Ready to download");
-  }
-  // Copy to target dir (CLI)
-  if ($cli) {
-    if (Cache === 0) {
-      print_line("Saved: $clipath");
-    } else {
-      copy($filepath, $clipath);
-      print_line("Saved: $clipath");
-    }
-  // Print download link (CGI)
+  // Saving
+  if (@$zip->close() === false) {
+    print_line("Failed to save zip");
   } else {
-    echo "    <script>var es = document.getElementsByClassName('download_link'); for(var i = 0; i < es.length; i++) { es[i].innerHTML = '<a href=\"{$webpath}\" download>Download</a>'; }</script>\n";
-    ob_flush();
-    flush();
+    if (Cache !== 0) {
+      print_line("Cache saved: $filepath");
+    }
+    $elapsed_time = microtime(true) - $start_time;
+    print_line("{$elapsed_time} sec");
+    if (!$cli) {
+      print_line("Ready to download");
+    }
+    // Copy to target dir (CLI)
+    if ($cli) {
+      if (Cache === 0) {
+        print_line("Saved: $clipath");
+      } else {
+        if (@copy($filepath, $clipath) === false) {
+          print_line("Failed to save zip");
+        } else {
+          print_line("Saved: $clipath");
+        }
+      }
+    // Print download link (CGI)
+    } else {
+      echo "    <script>var es = document.getElementsByClassName('download_link'); for(var i = 0; i < es.length; i++) { es[i].innerHTML = '<a href=\"{$webpath}\" download>Download</a>'; }</script>\n";
+      ob_flush();
+      flush();
+    }
   }
 }
 // Delete outdated caches
