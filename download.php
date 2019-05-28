@@ -10,8 +10,8 @@ $cli = false; // Global
 if ($id < 1) {
   $id = (int)filter_var($argv[1] ?? 0, FILTER_VALIDATE_INT);
   $cli = true; // Global
-  $savepath = (string)filter_var($argv[2] ?? "");
 }
+$savepath = (string)filter_var($argv[2] ?? "");
 // Verify param
 if ($id < 1) {
   header("Content-Type: text/plain; charset=UTF-8", true, 400);
@@ -30,7 +30,7 @@ if (empty($json)) {
 $package_info = json_decode($json, true);
 // Construct filename and save destination
 $cachedir = __DIR__."/caches";
-$clipath = ($savepath ?? "") === "" ? "$id.1.linestk.zip" : $savepath;
+$clipath = $savepath === "" ? "$id.1.linestk.zip" : $savepath;
 $filepath = Cache !== 0 || !$cli ? "$cachedir/$id.1.linestk.zip" : $clipath;
 $filename = basename($filepath);
 $webpath = "caches/$filename";
