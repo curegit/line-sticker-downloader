@@ -18,6 +18,16 @@ if ($id < 1) {
   echo "ID '$id' is out of range.\n";
   die(1);
 }
+if ($savepath !== "") {
+  if (!file_exists(dirname($savepath))) {
+    echo "No such directory\n";
+    die(1);
+  }
+  if (file_exists($savepath) && is_dir($savepath)) {
+    echo "Destination filepath is a directory\n";
+    die(1);
+  }
+}
 // Get JSON
 $json = @file_get_contents("http://dl.stickershop.line.naver.jp/products/0/0/1/$id/iphone/productInfo.meta");
 // Verify ID
