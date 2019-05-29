@@ -23,7 +23,7 @@ The download script is able to run from both CGI (browser) and CLI (terminal).
 2. Extract it to any web directory (personal server recommended)
 3. Give PHP's write permission to `caches` directory (0777 is common)
 
-### CLI
+### CLI only
 
 1. Download zip
 2. Extract it to anywhere
@@ -69,7 +69,7 @@ Use CLI with loop command.
 
 `for ((i=1000; i<=1050; i++)); do php download.php $i; done`
 
-## Note
+## Notes
 
 - The document size of download page would be large because the PHP program outputs a lot of dummy data so that a server sends document data continuously and a browser refresh the screen.
 - Sticker resources are located in public web directories, so anyone can get them easily and legally (private use only).
