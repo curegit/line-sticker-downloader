@@ -58,6 +58,8 @@ The download script is able to run from both CGI (browser) and CLI (terminal).
 
 See url of the store page.
 
+![Store](store_screen.png)
+
 ### IDs are consecutive
 
 - Official stickers are from 1
