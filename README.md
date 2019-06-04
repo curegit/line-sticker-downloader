@@ -69,7 +69,19 @@ See url of the store page.
 
 Use CLI with loop command.
 
-`for ((i=1000; i<=1050; i++)); do php download.php $i; done`
+- Bash
+
+```bash
+for ((i=1000; i<=1050; i++)); do php download.php $i; done
+```
+
+- Powershell
+
+```ps
+for ($i = 1000; $i -lt 1050; $i++) {
+  php download.php $i
+}
+```
 
 ## Notes
 
