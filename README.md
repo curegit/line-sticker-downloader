@@ -75,3 +75,4 @@ Use CLI with loop command.
 
 - The document size of download page would be large because the PHP program outputs a lot of dummy data so that a server sends document data continuously and a browser refresh the screen.
 - Sticker resources are located in public web directories, so anyone can get them easily and legally (private use only).
+- A few packages contain broken PNGs in iPhone stickers, missing important metadata. These stickers can't open with most applications, but there is a solution. Open them with OS X application (Preview etc.) and export as new images. Exported images may be valid form.
