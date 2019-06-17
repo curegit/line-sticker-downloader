@@ -103,11 +103,12 @@ if ($cli) {
     <head>
       <meta charset="utf-8">
       <title>Download | Line Sticker Downloader</title>
+      <link href="download.css" rel="stylesheet">
     </head>
     <body>
       <h1>Download 「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1>
       <p class="download_link"></p>
-      <p id="console" style="width: 100%; color: #FFF; background-color: #000;">
+      <p id="console">
       </p>
       <p class="download_link"></p>
       <p><a href="./">Back</a></p>

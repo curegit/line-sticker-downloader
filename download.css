@@ -1,0 +1,12 @@
+body {
+  text-align: left;
+  font-family: sans-serif;
+  background-color: #8892BF;
+}
+#console {
+  width: auto;
+  margin: 0px 4px;
+  padding: 5px;
+  color: #FFF;
+  background-color: #000;
+}
