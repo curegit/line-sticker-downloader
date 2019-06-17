@@ -85,7 +85,7 @@ for ($i = 1000; $i -lt 1050; $i++) {
 
 #### Multiprocessing downloading
 
-xargs can help.
+xargs may help.
 
 ```sh
 seq 1000 2000 | xargs -L 1 -P 8 php download.php
