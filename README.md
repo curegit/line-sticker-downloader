@@ -4,11 +4,11 @@ Download sticker images and assets in a zip from LINE Store
 
 ## Features
 
-The download script is able to run from both CGI (browser) and CLI (terminal).
+This download script is able to run from both CGI (browser) and CLI (terminal).
 
 ## Requirements
 
-- PHP 7
+- PHP 7.0+
 - PHP ZipArchive
 
 #### Debian example (CLI usage only)
