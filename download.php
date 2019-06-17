@@ -98,20 +98,20 @@ if ($cli) {
   @ob_end_flush();
   ob_start();
   ?>
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Download | Line Sticker Downloader</title>
-      <link href="download.css" rel="stylesheet">
-    </head>
-    <body>
-      <h1>Download 「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1>
-      <p class="download_link"></p>
-      <p id="console">
-      </p>
-      <p class="download_link"></p>
-      <p><a href="./">Back</a></p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Download | Line Sticker Downloader</title>
+    <link href="download.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Download 「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1>
+    <p class="download_link"></p>
+    <p id="console">
+    </p>
+    <p class="download_link"></p>
+    <p><a href="./">Back</a></p>
   <?php
   print_line("Start...");
   print_line("Target ID: $id");
