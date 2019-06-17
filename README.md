@@ -4,7 +4,8 @@ Download sticker images and assets in a zip from LINE Store
 
 ## Features
 
-This download script is able to run from both CGI (browser) and CLI (terminal).
+- Compatible sound and animation stickers
+- Able to run from both CGI (browser) and CLI (terminal)
 
 ## Requirements
 
@@ -32,23 +33,23 @@ This download script is able to run from both CGI (browser) and CLI (terminal).
 
 ### CGI
 
-1. Go to index.php
+1. Visit `index.html`
 2. Fill ID
-3. Click "Download" button
+3. Click a download button
 4. Wait
-5. Click "Download" link
+5. Click a download link
 
 ### CLI
 
-- Download id 1234 stickers
+- Download ID 1234 stickers
 
   `php download.php 1234`
   
-- Download id 1111111 stickers as `one.zip` in working directory
+- Download ID 1111111 stickers as `one.zip` in working directory
 
   `php download.php 1111111 one.zip`
 
-- Download id 5678 stickers as `abc.zip` in `foo` directory
+- Download ID 5678 stickers as `abc.zip` in `foo` directory
 
   `php download.php 5678 foo/abc.zip`
 
@@ -56,7 +57,7 @@ This download script is able to run from both CGI (browser) and CLI (terminal).
 
 ### How to find IDs
 
-See url of the store page.
+See the url where a sticker item sells.
 
 ![Store](store_screen.png)
 
