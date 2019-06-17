@@ -57,7 +57,7 @@ Download sticker images and assets in a zip from LINE Store
 
 ### How to find IDs
 
-See the url where a sticker item sells.
+See the url of a page which a sticker item sells.
 
 ![Store](store_screen.png)
 
@@ -86,6 +86,6 @@ for ($i = 1000; $i -lt 1050; $i++) {
 
 ## Notes
 
-- The document size of download page would be large because the PHP program outputs a lot of dummy data so that a server sends document data continuously and a browser refresh the screen.
+- The size of a download page would be large because the PHP program outputs a lot of dummy data so that a server sends document data continuously, and a browser refresh the screen.
 - Sticker resources are located in public web directories, so anyone can get them easily and legally (private use only).
-- A few packages contain broken PNGs in iPhone stickers, missing important metadata. These stickers can't open with most applications, but there is a solution. Open them with OS X application (Preview etc.) and export as new images. Exported images may be valid form.
+- A few packages contain broken PNGs in iPhone stickers, missing important metadata. These stickers can't open with most applications, but there is a solution. Open them with OS X's application (Preview etc.) and export as new images. Exported images may be valid form.
