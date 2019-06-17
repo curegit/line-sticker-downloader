@@ -1,6 +1,6 @@
 <?php
-// Cache days (set 0 to disable caching)
-const Cache = 30;
+// Include settings
+require_once __DIR__."/settings.php";
 // Memory start time
 $start_time = microtime(true);
 // Get param (CGI)
