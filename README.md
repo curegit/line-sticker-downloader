@@ -1,6 +1,6 @@
 # Line Sticker Downloader
 
-Download sticker images and assets in a zip from LINE Store
+Download sticker images and assets in zip from LINE Store
 
 ## Features
 
@@ -20,14 +20,13 @@ Download sticker images and assets in a zip from LINE Store
 
 ### CGI and CLI
 
-1. Download zip
-2. Extract it to any web directory (personal server recommended)
-3. Give PHP's write permission to `caches` directory (0777 is common)
+1. Clone the repository, or download zip and extract it
+2. Deploy the entire directory to a web server (personal server recommended)
+3. Give PHP permission to write in `caches` directory (0777 is common)
 
 ### CLI only
 
-1. Download zip
-2. Extract it to anywhere
+1. Clone the repository, or download zip and extract it
 
 ## Usage
 
@@ -57,7 +56,7 @@ Download sticker images and assets in a zip from LINE Store
 
 ### How to find IDs
 
-See the url of a page which a sticker item sells.
+See the url of a sticker item page.
 
 ![Store](store_screen.png)
 
@@ -82,6 +81,14 @@ for ((i=1000; i<=1050; i++)); do php download.php $i; done
 for ($i = 1000; $i -lt 1050; $i++) {
   php download.php $i
 }
+```
+
+#### Multiprocessing downloading
+
+xargs can help.
+
+```sh
+seq 1000 2000 | xargs -L 1 -P 8 php download.php
 ```
 
 ## Notes
