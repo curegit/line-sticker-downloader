@@ -15,7 +15,7 @@ $savepath = (string)filter_var($argv[2] ?? "");
 // Verify param
 if ($id < 1) {
   header("Content-Type: text/plain; charset=UTF-8", true, 400);
-  echo "ID '$id' is out of range.\n";
+  echo "ID '$id' is out of range.".PHP_EOL;
   die(1);
 }
 if ($savepath !== "") {
@@ -24,7 +24,7 @@ if ($savepath !== "") {
     die(1);
   }
   if (file_exists($savepath) && is_dir($savepath)) {
-    echo "Destination filepath is a directory\n";
+    echo "Destination filepath is a directory".PHP_EOL;
     die(1);
   }
 }
@@ -33,7 +33,7 @@ $json = @file_get_contents("http://dl.stickershop.line.naver.jp/products/0/0/1/$
 // Verify ID
 if (empty($json)) {
   header("Content-Type: text/plain; charset=UTF-8", true, 400);
-  echo "ID '$id' does not exist.\n";
+  echo "ID '$id' does not exist.".PHP_EOL;
   die(1);
 }
 // Decode JSON
@@ -220,7 +220,7 @@ if ($result !== true) {
       }
     // Print download link (CGI)
     } else {
-      echo "    <script>var es = document.getElementsByClassName('download_link'); for(var i = 0; i < es.length; i++) { es[i].innerHTML = '<a href=\"{$webpath}\" download>Download</a>'; }</script>\n";
+      echo "    <script>var es = document.getElementsByClassName('download_link'); for(var i = 0; i < es.length; i++) { es[i].innerHTML = '<a href=\"{$webpath}\" download>Download</a>'; }</script>".PHP_EOL;
       ob_flush();
       flush();
     }
@@ -255,10 +255,10 @@ function h($html) {
 function print_line($str) {
   global $cli;
   if ($cli) {
-    echo "$str\n";
+    echo "$str".PHP_EOL;
   } else {
-    echo "    <!-- dummy data: ".str_pad("", 3600, "アイ！カツ！")." -->\n"; // Send dummy to force browser to render
-    echo "    <script>document.getElementById('console').insertAdjacentHTML('beforeEnd', '$str<br>');</script>\n";
+    echo "    <!-- dummy data: ".str_pad("", 3600, "アイ！カツ！")." -->".PHP_EOL; // Send dummy to force browser to render
+    echo "    <script>document.getElementById('console').insertAdjacentHTML('beforeEnd', '$str<br>');</script>".PHP_EOL;
     ob_flush();
     flush();
   }
