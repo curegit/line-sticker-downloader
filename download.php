@@ -230,7 +230,7 @@ if ($result !== true) {
 $caches = glob("$cachedir/*.zip");
 foreach($caches as $cache){
   if(is_file($cache)) {
-    if (time() - filemtime($cache) > 60 * 60 * 24 * Cache) {
+    if (time() - filemtime($cache) > 60 * 60 * 24 * (Cache < 1 ? 1 : Cache)) {
       if (@unlink($cache)) {
         print_line("Server cache cleaned: $cache");
       }
