@@ -43,7 +43,7 @@ Download sticker images and assets in zip from LINE Store
 - Download ID 1234 stickers
 
   `php download.php 1234`
-  
+
 - Download ID 1111111 stickers as `one.zip` in working directory
 
   `php download.php 1111111 one.zip`
