@@ -259,7 +259,7 @@ function print_line($str) {
     echo "$str".PHP_EOL;
   } else {
     echo "    <!-- dummy data: ".str_pad("", 3600, "アイ！カツ！")." -->".PHP_EOL; // Send dummy to force browser to render
-    echo "    <script>document.getElementById('console').insertAdjacentHTML('beforeEnd', '$str<br>');</script>".PHP_EOL;
+    echo "    <script>document.getElementById('console').insertAdjacentHTML('beforeEnd', '".h($str)."<br>');</script>".PHP_EOL;
     ob_flush();
     flush();
   }
