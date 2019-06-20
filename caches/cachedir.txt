@@ -1,0 +1,2 @@
+Don't remove this directory.
+It is used for caching and saving CGI's temporary files.

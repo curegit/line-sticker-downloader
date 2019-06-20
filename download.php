@@ -45,12 +45,6 @@ $filepath = Cache !== 0 || !$cli ? "$cachedir/$id.1.linestk.zip" : $clipath;
 $filename = basename($filepath);
 $webpath = "caches/$filename";
 $cachepath = "$cachedir/$filename";
-// Make cache dir
-if (!file_exists($cachedir)) {
-  @mkdir($cachedir);
-}
-// Change permission
-@chmod($cachedir, 0777);
 // Output and exit if there is the data in cache dir
 if (Cache !== 0) {
   if (file_exists($cachepath) === true) {
