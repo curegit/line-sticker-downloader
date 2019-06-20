@@ -52,6 +52,8 @@ Download sticker images and assets in zip from LINE Store
 
   `php download.php 5678 foo/abc.zip`
 
+Existing files will be overwritten.
+
 ## Tips
 
 ### How to find IDs
