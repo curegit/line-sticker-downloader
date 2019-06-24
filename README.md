@@ -33,9 +33,9 @@ Download sticker images and assets in zip from LINE Store
 ### CGI
 
 1. Visit `index.html`
-2. Fill ID
+2. Fill in a sticker ID
 3. Click a download button
-4. Wait
+4. Wait for a minute
 5. Click a download link
 
 ### CLI
