@@ -97,7 +97,7 @@ if ($cli) {
   <head>
     <meta charset="utf-8">
     <title>Download | Line Sticker Downloader</title>
-    <link href="download.css" rel="stylesheet">
+    <link href="console.css" rel="stylesheet">
   </head>
   <body>
     <h1>Download 「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1>
