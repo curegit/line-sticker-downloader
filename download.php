@@ -166,10 +166,9 @@ if ($result !== true) {
     if ($has_popup) {
       $zip->addEmptyDir("$profile/popup");
     }
-    // Add base & overlay folder
+    // Add base folder
     if ($is_custom_text) {
       $zip->addEmptyDir("$profile/base");
-      $zip->addEmptyDir("$profile/overlay");
     }
     // Each stickers
     foreach ($package_info["stickers"] as $sticker) {
@@ -198,9 +197,12 @@ if ($result !== true) {
           add_file_to_zip($zip, "$profile/popup/$popup", "http://dl.stickershop.line.naver.jp/products/0/0/1/$id/$profile/popup/$popup");
         }
       }
-      // Add custom text base & overlay
+      // Add custom text base
       if ($is_custom_text) {
-        // TODO
+        $bases = ["@2x.png", ".png"];
+        foreach ($bases as $base) {
+         add_file_to_zip($zip, "$profile/base/{$sticker_id}{$base}", "https://stickershop.line-scdn.net/stickershop/v1/sticker/$sticker_id/$profile/base/sticker{$base}");
+        }
       }
     }
   }
