@@ -93,6 +93,12 @@ Xargs may help.
 seq 1000 2000 | xargs -L 1 -P 8 php download.php
 ```
 
+In case of PowerShell 7.0 or newer, `ForEach-Object -Parallel` is suitable.
+
+```ps1
+2000..3000 | ForEach-Object -Parallel -ThrottleLimit 8 { php download.php $_ }
+```
+
 ## Notes
 
 - The size of a download page (CGI) would be large because the PHP program outputs a lot of dummy data so that a server sends document data continuously and a browser refresh the screen.
