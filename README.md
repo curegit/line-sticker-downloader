@@ -79,7 +79,7 @@ for ((i=1000; i<=1050; i++)); do php download.php $i; done
 
 - PowerShell
 
-```ps
+```ps1
 for ($i = 1000; $i -lt 1050; $i++) {
   php download.php $i
 }
@@ -96,7 +96,7 @@ seq 1000 2000 | xargs -L 1 -P 8 php download.php
 In case of PowerShell 7.0 or newer, `ForEach-Object -Parallel` is suitable.
 
 ```ps1
-2000..3000 | ForEach-Object -Parallel -ThrottleLimit 8 { php download.php $_ }
+2000..3000 | ForEach-Object -ThrottleLimit 8 -Parallel { php download.php $_ }
 ```
 
 ## Notes
