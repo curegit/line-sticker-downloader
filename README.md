@@ -60,7 +60,7 @@ Existing files will be overwritten.
 
 See the URL of a sticker item page.
 
-![Store](store_screen.png)
+![Store](images/store_screen.png)
 
 ### IDs are consecutive
 

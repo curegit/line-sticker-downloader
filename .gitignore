@@ -2,3 +2,4 @@
 *.png
 *.m4a
 *.meta
+!images/*.png
