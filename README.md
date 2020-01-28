@@ -105,6 +105,10 @@ In case of PowerShell 7.0 or newer, `ForEach-Object -Parallel` is suitable.
 - Sticker resources are located in public web directories, so anyone can get them easily and legally (private use only).
 - A few packages contain broken PNGs in iPhone stickers, missing important metadata. These stickers can't open with most applications, but there is a solution. Open them with macOS's application (Preview etc.) and export as new images. Exported images may be valid form.
 
+## Related
+
+[Line Theme Downloader](https://github.com/curegit/line-theme-downloader)
+
 ## License
 
 [WTFPL](LICENSE)
