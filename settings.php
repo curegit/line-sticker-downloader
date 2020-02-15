@@ -1,3 +1,3 @@
 <?php
-// Cache days (set 0 to disable caching)
+// Days to live of caches (set 0 to disable caching)
 const Cache = 0;

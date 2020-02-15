@@ -100,13 +100,12 @@ if ($cli) {
     <link href="console.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Download 「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1>
+    <h1>Downloading「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1>
     <p class="download_link"></p>
-    <p id="console">
-    </p>
+    <p id="console"></p>
     <p class="download_link"></p>
     <p><a href="./">Back</a></p>
-  <?php
+<?php
   print_line("Start...");
   print_line("Target ID: $id");
   ob_flush();
@@ -237,7 +236,7 @@ if ($result !== true) {
 $caches = glob("$cachedir/*.zip");
 foreach($caches as $cache){
   if(is_file($cache)) {
-    if (time() - filemtime($cache) > 60 * 60 * 24 * (Cache < 1 ? 1 : Cache)) {
+    if (time() - filemtime($cache) > (Cache < 1 ? 1800 : 60 * 60 * 24 * Cache)) {
       if (@unlink($cache)) {
         print_line("Server cache cleaned: $cache");
       }
