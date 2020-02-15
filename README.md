@@ -69,7 +69,7 @@ See the URL of a sticker item page.
 
 ### Download multiple sticker packages
 
-Use CLI with loop command.
+Use CLI with a loop command.
 
 - Bash
 
@@ -80,9 +80,7 @@ for ((i=1000; i<=1050; i++)); do php download.php $i; done
 - PowerShell
 
 ```ps1
-for ($i = 1000; $i -lt 1050; $i++) {
-  php download.php $i
-}
+for ($i = 1000; $i -lt 1050; $i++) { php download.php $i }
 ```
 
 #### Multiprocessing downloading
@@ -93,7 +91,7 @@ Xargs may help.
 seq 1000 2000 | xargs -L 1 -P 8 php download.php
 ```
 
-In case of PowerShell 7.0 or newer, `ForEach-Object -Parallel` is suitable.
+In the case of PowerShell 7.0 or newer, `ForEach-Object -Parallel` is suitable.
 
 ```ps1
 2000..3000 | ForEach-Object -ThrottleLimit 8 -Parallel { php download.php $_ }
@@ -103,7 +101,7 @@ In case of PowerShell 7.0 or newer, `ForEach-Object -Parallel` is suitable.
 
 - The size of a download page (CGI) would be large because the PHP program outputs a lot of dummy data so that a server sends document data continuously and a browser refresh the screen.
 - Sticker resources are located in public web directories, so anyone can get them easily and legally (private use only).
-- A few packages contain broken PNGs in iPhone stickers, missing important metadata. These stickers can't open with most applications, but there is a solution. Open them with macOS's application (Preview etc.) and export as new images. Exported images may be valid form.
+- A few packages contain broken PNGs in iPhone stickers, missing important metadata. These stickers can't open with most applications, but there is a solution. Open them with macOS's application (Preview etc.) and export as new images. Exported images may be valid forms.
 
 ## Related
 
