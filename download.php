@@ -91,7 +91,7 @@ if ($cli) {
   // Start flushing
   @ob_end_flush();
   ob_start();
-  ?>
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -234,7 +234,7 @@ if ($result !== true) {
 }
 // Delete outdated caches
 $caches = glob("$cachedir/*.zip");
-foreach($caches as $cache){
+foreach($caches as $cache) {
   if(is_file($cache)) {
     if (time() - filemtime($cache) > (Cache < 1 ? 1800 : 60 * 60 * 24 * Cache)) {
       if (@unlink($cache)) {
