@@ -194,7 +194,7 @@ if ($result !== true) {
       if ($is_custom_text) {
         $bases = ["@2x.png", ".png"];
         foreach ($bases as $base) {
-         add_file_to_zip($zip, "$profile/base/{$sticker_id}{$base}", "https://stickershop.line-scdn.net/stickershop/v1/sticker/$sticker_id/$profile/base/sticker{$base}");
+          add_file_to_zip($zip, "$profile/base/{$sticker_id}{$base}", "https://stickershop.line-scdn.net/stickershop/v1/sticker/$sticker_id/$profile/base/sticker{$base}");
         }
       }
     }
