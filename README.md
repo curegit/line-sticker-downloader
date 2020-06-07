@@ -4,7 +4,7 @@ Download sticker images and assets in zip from LINE Store
 
 ## Features
 
-- Compatible sound and animation stickers
+- Compatible with sound and animation stickers
 - Able to run from both CGI (browser) and CLI (terminal)
 
 ## Requirements
