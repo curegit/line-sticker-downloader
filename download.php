@@ -101,6 +101,7 @@ if ($cli) {
   </head>
   <body>
     <h1>Downloading「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1>
+    <p><a href="./">Back</a></p>
     <p class="download_link"></p>
     <p id="console"></p>
     <p class="download_link"></p>
