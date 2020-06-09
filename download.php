@@ -125,6 +125,7 @@ if ($result !== true) {
   $has_animation = (boolean)($package_info["hasAnimation"] ?? false) && $package_info["hasAnimation"] !== "false";
   $has_popup = (boolean)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "popup") !== false;
   $is_custom_text = (boolean)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "NAME_TEXT") !== false;
+  $is_free_text = (boolean)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "PER_STICKER_TEXT") !== false;
   // Devices array
   $profiles = array("iPhone", "android", "WindowsPhone", "PC");
   // Each devices
@@ -163,6 +164,11 @@ if ($result !== true) {
     if ($is_custom_text) {
       $zip->addEmptyDir("$profile/base");
     }
+    // Add plus folders
+    if ($is_free_text) {
+      $zip->addEmptyDir("$profile/base/plus");
+      $zip->addEmptyDir("$profile/overlay/plus/default");
+    }
     // Each stickers
     foreach ($package_info["stickers"] as $sticker) {
       // Add images
@@ -195,6 +201,14 @@ if ($result !== true) {
         $bases = ["@2x.png", ".png"];
         foreach ($bases as $base) {
           add_file_to_zip($zip, "$profile/base/{$sticker_id}{$base}", "https://stickershop.line-scdn.net/stickershop/v1/sticker/$sticker_id/$profile/base/sticker{$base}");
+        }
+      }
+      // Add free text base and overlay
+      if ($is_free_text) {
+        $types = ["@2x.png", ".png"];
+        foreach ($types as $type) {
+          add_file_to_zip($zip, "$profile/base/plus/{$sticker_id}{$type}", "https://stickershop.line-scdn.net/stickershop/v1/sticker/$sticker_id/$profile/base/plus/sticker{$type}");
+          add_file_to_zip($zip, "$profile/overlay/plus/default/{$sticker_id}{$type}", "https://stickershop.line-scdn.net/stickershop/v1/product/{$id}/sticker/$sticker_id/$profile/overlay/plus/default/sticker{$type}");
         }
       }
     }
