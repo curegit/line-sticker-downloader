@@ -157,7 +157,7 @@ if ($result !== true) {
     if ($has_animation) {
       $zip->addEmptyDir("$profile/animation");
     }
-    // Add popup folder
+    // Add popup (animated background) folder
     if ($has_popup) {
       $zip->addEmptyDir("$profile/popup");
     }
@@ -190,7 +190,7 @@ if ($result !== true) {
           add_file_to_zip($zip, "$profile/animation/$animation", "http://dl.stickershop.line.naver.jp/products/0/0/1/$id/$profile/animation/$animation");
         }
       }
-      // Add popup
+      // Add popup (animated background)
       if ($has_popup) {
         $popups = ["{$sticker_id}@2x.png", "{$sticker_id}.png"];
         foreach ($popups as $popup) {
