@@ -86,8 +86,7 @@ if (!$cli) {
   @ini_set("zlib.output_compression", 0);
   // Tell not to use cache
   header("Content-type: text/html; charset=utf-8");
-  header("Cache-Control: no-cache, must-revalidate");
-  header("X-Accel-Buffering: no");
+  header("Cache-Control: no-store");
 }
 // CLI mode
 if ($cli) {
