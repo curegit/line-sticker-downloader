@@ -84,6 +84,8 @@ if (!$cli) {
   @ini_set("output_buffering", 0);
   // Disable compression
   @ini_set("zlib.output_compression", 0);
+  // Prevent buffering
+  header("X-Accel-Buffering: no");
   // Tell not to use cache
   header("Content-type: text/html; charset=utf-8");
   header("Cache-Control: no-store");
