@@ -8,5 +8,6 @@ const Cache = 0;
 const Tmp = 120;
 // When this file accessed directly
 if ($main) {
+  http_response_code(403);
   header("Content-type: text/plain; charset=utf-8");
 }

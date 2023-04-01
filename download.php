@@ -35,7 +35,7 @@ if ($savepath !== "") {
 $json = @file_get_contents("http://dl.stickershop.line.naver.jp/products/0/0/1/$id/iphone/productInfo.meta");
 // Verify ID
 if (empty($json)) {
-  header("Content-Type: text/plain; charset=UTF-8", true, 400);
+  header("Content-Type: text/plain; charset=UTF-8", true, 404);
   echo "ID '$id' does not exist.".PHP_EOL;
   die(1);
 }
