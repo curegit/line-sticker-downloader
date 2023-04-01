@@ -17,8 +17,13 @@ if ($id < 1) {
 $savepath = (string)filter_var($argv[2] ?? "");
 // Verify param
 if ($id < 1) {
-  header("Content-Type: text/plain; charset=UTF-8", true, 400);
-  echo "ID '$id' is out of range.".PHP_EOL;
+  if (($_SERVER["REQUEST_METHOD"] ?? "CLI") !== "POST") {
+    header("Content-Type: text/plain; charset=UTF-8", true, 405);
+    echo "Method Not Allowed.".PHP_EOL;
+  } else {
+    header("Content-Type: text/plain; charset=UTF-8", true, 400);
+    echo "ID '$id' is out of range.".PHP_EOL;
+  }
   die(1);
 }
 if ($savepath !== "") {
