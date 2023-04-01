@@ -229,7 +229,7 @@ if ($result !== true) {
     print_line("Failed to save zip");
   } else {
     if (Cache !== 0) {
-      print_line("Cache saved: $filepath");
+      print_line("Cache saved: $filename");
     }
     $elapsed_time = microtime(true) - $start_time;
     print_line("{$elapsed_time} sec");
