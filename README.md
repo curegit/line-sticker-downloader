@@ -14,7 +14,7 @@ It works in both browser-based and command-line environments.
 - PHP >= 7.0
 - PHP Zip extension
 
-#### Debian example (CLI usage only)
+### Debian example (CLI usage only)
 
 `sudo apt install php-cli php-zip`
 
