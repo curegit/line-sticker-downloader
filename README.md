@@ -60,7 +60,7 @@ Existing files will be overwritten.
 
 ### How to find IDs
 
-See the URL of a sticker item page.
+See the URL of sticker item pages.
 
 ![Store](images/store_screen.png)
 
@@ -102,7 +102,7 @@ If you are using PowerShell 7.0 or newer, `ForEach-Object -Parallel` is a suitab
 ## Notes
 
 - The size of a download page (CGI) may be slightly large because the PHP program outputs a lot of dummy data so that a server sends document data continuously and a browser refreshes the screen.
-- Sticker resources are located in public web directories, so anyone can access them easily and legally (for private use only).
+- The sticker resources are located in public web directories, so anyone can access them easily and legally (for private use only).
 - A few packages contain broken PNGs in iPhone stickers, missing important metadata. These stickers can't open with most applications, but there is a solution. Open them with macOS's Preview application and export as new images. The exported images may be valid forms.
 
 ## Related
