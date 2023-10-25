@@ -16,7 +16,11 @@ $savepath = (string)filter_var($argv[2] ?? "");
 if ($id < 1) {
   if (($_SERVER["REQUEST_METHOD"] ?? "CLI") !== "POST") {
     header("Content-Type: text/plain; charset=UTF-8", true, 405);
-    echo "Method Not Allowed.".PHP_EOL;
+    if ($argv[0]) {
+      echo "Pass an ID.".PHP_EOL;
+    } else {
+      echo "Method Not Allowed.".PHP_EOL;
+    }
   } else {
     header("Content-Type: text/plain; charset=UTF-8", true, 400);
     echo "ID '$id' is out of range.".PHP_EOL;
