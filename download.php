@@ -5,18 +5,17 @@ require_once __DIR__."/settings.php";
 $start_time = microtime(true);
 // Get param (CGI)
 $id = (int)filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
-$cli = false; // Global
+$cli = (boolean)($argv[0] ?? false); // Global
 // CLI args
 if ($id < 1) {
   $id = (int)filter_var($argv[1] ?? 0, FILTER_VALIDATE_INT);
-  $cli = true; // Global
 }
 $savepath = (string)filter_var($argv[2] ?? "");
 // Verify param
 if ($id < 1) {
   if (($_SERVER["REQUEST_METHOD"] ?? "CLI") !== "POST") {
     header("Content-Type: text/plain; charset=UTF-8", true, 405);
-    if ($argv[0]) {
+    if ($cli) {
       echo "Pass an ID.".PHP_EOL;
     } else {
       echo "Method Not Allowed.".PHP_EOL;
