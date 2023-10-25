@@ -8,4 +8,6 @@ const Tmp = 120;
 if (!debug_backtrace()) {
   http_response_code(403);
   header("Content-type: text/plain; charset=utf-8");
+  echo "Forbidden.".PHP_EOL;
+  die(1);
 }
