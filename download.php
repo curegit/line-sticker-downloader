@@ -1,7 +1,4 @@
 <?php
-if ($main = !defined("MAIN")) {
-  define("MAIN", __FILE__);
-}
 // Include settings
 require_once __DIR__."/settings.php";
 // Memory start time
