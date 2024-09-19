@@ -137,7 +137,7 @@ if ($result !== true) {
   $is_custom_text = (boolean)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "NAME_TEXT") !== false;
   $is_free_text = (boolean)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "PER_STICKER_TEXT") !== false;
   // Devices array
-  $profiles = array("iPhone", "android", "WindowsPhone", "PC");
+  $profiles = array("iPhone", "android", "PC");
   // Each devices
   foreach ($profiles as $profile) {
     // Make dirs for each devices
