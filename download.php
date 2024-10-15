@@ -28,7 +28,7 @@ if ($id < 1) {
 }
 if ($savepath !== "") {
   if (!file_exists(dirname($savepath))) {
-    echo "No such directory\n";
+    echo "No such directory".PHP_EOL;
     die(1);
   }
   if (file_exists($savepath) && is_dir($savepath)) {
@@ -101,20 +101,20 @@ if ($cli) {
   @ob_end_flush();
   ob_start();
 ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Download | Line Sticker Downloader</title>
-    <link href="console.css" rel="stylesheet">
-  </head>
-  <body>
-    <h1>Downloading「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1>
-    <p><a href="./">Back</a></p>
-    <p class="download_link"></p>
-    <p id="console"></p>
-    <p class="download_link"></p>
-    <p><a href="./">Back</a></p>
+<!DOCTYPE html><?= PHP_EOL ?>
+<html><?= PHP_EOL ?>
+  <head><?= PHP_EOL ?>
+    <meta charset="utf-8"><?= PHP_EOL ?>
+    <title>Download | Line Sticker Downloader</title><?= PHP_EOL ?>
+    <link href="console.css" rel="stylesheet"><?= PHP_EOL ?>
+  </head><?= PHP_EOL ?>
+  <body><?= PHP_EOL ?>
+    <h1>Downloading「<?= h($package_info["title"]["ja"] ?? "日本語名なし") ?> (<?= h($package_info["title"]["en"] ?? "No English name available") ?>)」</h1><?= PHP_EOL ?>
+    <p><a href="./">Back</a></p><?= PHP_EOL ?>
+    <p class="download_link"></p><?= PHP_EOL ?>
+    <p id="console"></p><?= PHP_EOL ?>
+    <p class="download_link"></p><?= PHP_EOL ?>
+    <p><a href="./">Back</a></p><?= PHP_EOL ?>
 <?php
   print_line("Start...");
   print_line("Target ID: $id");
@@ -270,8 +270,8 @@ foreach($caches as $cache) {
 // End of document
 if (!$cli) {
 ?>
-  </body>
-</html>
+  </body><?= PHP_EOL ?>
+</html><?= PHP_EOL ?>
 <?php
   ob_flush();
   flush();
