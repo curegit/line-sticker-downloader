@@ -46,6 +46,11 @@ if (empty($json)) {
 }
 // Decode JSON
 $package_info = json_decode($json, true);
+if (!$package_info) {
+  header("Content-Type: text/plain; charset=UTF-8", true, 500);
+  echo "Failed to decode the package info.".PHP_EOL;
+  die(1);
+}
 // Construct filename and save destination
 $cachedir = __DIR__."/caches";
 $clipath = $savepath === "" ? "$id.1.linestk.zip" : $savepath;
