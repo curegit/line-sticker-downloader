@@ -131,7 +131,7 @@ if ($cli) {
 // Make Zip object
 $zip = new ZipArchive();
 $random_hash = substr(hash("sha256", random_bytes(1024)), 0, 32);
-$tmp_zip_filepath = $cli ? $filepath : $filepath."$random_hash.tmp.zip";
+$tmp_zip_filepath = $cli ? $filepath : $filepath.".$random_hash.tmp.zip";
 $result = @$zip->open($tmp_zip_filepath, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
 // If it failed to make zip
 if ($result !== true) {
