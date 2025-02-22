@@ -61,7 +61,7 @@ $cachepath = "$cachedir/$filename";
 // Output and exit if there is the data in cache dir
 if (Cache !== 0) {
   if (file_exists($cachepath) === true) {
-    if (time() - filemtime($cache) <= 60 * 60 * 24 * Cache) {
+    if (time() - filemtime($cachepath) <= 60 * 60 * 24 * Cache) {
       // CLI
       if ($cli) {
         print_line("Cache exists");
