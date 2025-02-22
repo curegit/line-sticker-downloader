@@ -61,22 +61,24 @@ $cachepath = "$cachedir/$filename";
 // Output and exit if there is the data in cache dir
 if (Cache !== 0) {
   if (file_exists($cachepath) === true) {
-    // CLI
-    if ($cli) {
-      print_line("Cache exists");
-      if (@copy($cachepath, $clipath) === false) {
-        print_line("Failed to save zip");
-        die(1);
+    if (time() - filemtime($cache) <= 60 * 60 * 24 * Cache) {
+      // CLI
+      if ($cli) {
+        print_line("Cache exists");
+        if (@copy($cachepath, $clipath) === false) {
+          print_line("Failed to save zip");
+          die(1);
+        }
+        print_line("Saved: $clipath");
+      // CGI
+      } else {
+        header("Content-Type: application/zip; name=\"$filename\"");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header("Content-Length: ".filesize($cachepath));
+        echo file_get_contents($cachepath);
       }
-      print_line("Saved: $clipath");
-    // CGI
-    } else {
-      header("Content-Type: application/zip; name=\"$filename\"");
-      header("Content-Disposition: attachment; filename=\"$filename\"");
-      header("Content-Length: ".filesize($cachepath));
-      echo file_get_contents($cachepath);
+      exit(0);
     }
-    exit(0);
   }
 }
 // Tricks for CGI
@@ -263,9 +265,10 @@ if ($result !== true) {
 }
 // Delete outdated caches
 $caches = glob("$cachedir/*.zip");
-foreach($caches as $cache) {
-  if(is_file($cache)) {
-    if (time() - filemtime($cache) > (Cache <= 0 ? 60 * Tmp : 60 * 60 * 24 * Cache)) {
+foreach ($caches as $cache) {
+  if (is_file($cache)) {
+    // Have +1 hour margin instead of locking files
+    if (time() - filemtime($cache) > (Cache <= 0 ? 60 * Tmp : 60 * 60 * 24 * Cache + 60 * 60)) {
       if (@unlink($cache)) {
         print_line("Server cache cleaned: $cache");
       }
