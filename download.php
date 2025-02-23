@@ -79,11 +79,11 @@ if (Cache !== 0) {
       }
       exit(0);
     } elseif (!$cli) {
-      @touch($cachepath);
+      @touch($cachepath, time() - 60 * 60 * 24 * Cache - 10);
     }
   }
 } elseif (!$cli) {
-  @touch($cachepath);
+  @touch($cachepath, time() - 60 * Tmp - 10);
 }
 // Tricks for CGI
 if (!$cli) {
@@ -278,7 +278,7 @@ $caches = glob("$cachedir/*.zip");
 foreach ($caches as $cache) {
   if (is_file($cache)) {
     // Have +1 hour margin instead of locking files
-    if (time() - filemtime($cache) > (Cache <= 0 ? 60 * Tmp : 60 * 60 * 24 * Cache + 60 * 60)) {
+    if (time() - filemtime($cache) > ((Cache <= 0 ? 60 * Tmp : 60 * 60 * 24 * Cache) + 60 * 60)) {
       if (@unlink($cache)) {
         print_line("Server cache cleaned: $cache");
       }
