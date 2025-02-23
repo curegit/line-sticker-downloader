@@ -60,7 +60,7 @@ $webpath = "caches/$filename";
 $cachepath = "$cachedir/$filename";
 // Output and exit if there is the data in cache dir
 if (Cache !== 0) {
-  if (file_exists($cachepath) === true) {
+  if (file_exists($cachepath) === true && @filesize($cachepath)) {
     if (time() - filemtime($cachepath) <= 60 * 60 * 24 * Cache) {
       // CLI
       if ($cli) {
@@ -78,6 +78,8 @@ if (Cache !== 0) {
         echo file_get_contents($cachepath);
       }
       exit(0);
+    } elseif (!$cli) {
+      @touch($cachepath);
     }
   }
 }
@@ -237,7 +239,7 @@ if ($result !== true) {
     $e = 1;
     print_line("Failed to save zip");
   // Atomic file creation (CGI)
-  } elseif (!$cli && rename($tmp_zip_filepath, $filepath) === false && file_exists($filepath) !== true) {
+  } elseif (!$cli && (@rename($tmp_zip_filepath, $filepath)) === false && file_exists($filepath) !== true) {
     $e = 1;
     print_line("Failed to save zip");
   } else {
