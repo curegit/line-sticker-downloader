@@ -82,6 +82,8 @@ if (Cache !== 0) {
       @touch($cachepath);
     }
   }
+} elseif (!$cli) {
+  @touch($cachepath);
 }
 // Tricks for CGI
 if (!$cli) {
