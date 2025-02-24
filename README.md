@@ -50,7 +50,7 @@ It works in both browser-based and command-line environments.
 
   `php download.php 1111111 one.zip`
 
-- To download stickers with ID 5678 and save them as `abc.zip` in the `foo` directory, run:
+- To download stickers with ID 5678 and save them as `abc.zip` in an existing `foo` directory, run:
 
   `php download.php 5678 foo/abc.zip`
 
