@@ -80,7 +80,7 @@ if (Cache !== 0) {
         }
         header("Content-Type: application/zip; name=\"$filename\"");
         header("Content-Disposition: attachment; filename=\"$filename\"");
-        header("Content-Length: ".$filesize);
+        header("Content-Length: $filesize");
         echo fread($fp, $filesize);
         fclose($fp);
       }
