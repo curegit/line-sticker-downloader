@@ -72,10 +72,17 @@ if (Cache !== 0) {
         print_line("Saved: $clipath");
       // CGI
       } else {
+        $fp = @fopen($cachepath, "rb");
+        if ($fp === false || ($filesize = fstat($fp)["size"]) === false) {
+          header("Content-Type: text/plain; charset=UTF-8", true, 500);
+          echo "Failed to read the cache.".PHP_EOL;
+          die(1);
+        }
         header("Content-Type: application/zip; name=\"$filename\"");
         header("Content-Disposition: attachment; filename=\"$filename\"");
-        header("Content-Length: ".filesize($cachepath));
-        echo file_get_contents($cachepath);
+        header("Content-Length: ".$filesize);
+        echo fread($fp, $filesize);
+        fclose($fp);
       }
       exit(0);
     } elseif (!$cli) {
