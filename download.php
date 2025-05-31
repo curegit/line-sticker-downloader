@@ -301,7 +301,7 @@ if (!$cli) {
   ob_flush();
   flush();
 }
-return ($e ?? 0);
+return $e ?? 0;
 // Sanitize HTML
 function h($html) {
   return htmlspecialchars($html, ENT_QUOTES, "UTF-8");
