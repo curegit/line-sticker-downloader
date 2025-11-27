@@ -12,7 +12,8 @@ It works in both browser-based and command-line environments.
 ## Requirements
 
 - PHP >= 7.0
-- PHP Zip extension
+- PHP's Zip extension
+- PHP's OpenSSL support
 
 ### Debian example (CLI usage only)
 
