@@ -5,7 +5,7 @@ require_once __DIR__."/settings.php";
 $start_time = microtime(true);
 // Get param (CGI)
 $id = (int)filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
-$cli = (boolean)($argv[0] ?? false); // Global
+$cli = (bool)($argv[0] ?? false); // Global
 // CLI args
 if ($id < 1) {
   $id = (int)filter_var($argv[1] ?? 0, FILTER_VALIDATE_INT);
@@ -151,11 +151,11 @@ if ($result !== true) {
 // If it made zip successfully
 } else {
   // Check additional contents
-  $has_sound = (boolean)($package_info["hasSound"] ?? false) && $package_info["hasSound"] !== "false" || (boolean)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "sound") !== false;
-  $has_animation = (boolean)($package_info["hasAnimation"] ?? false) && $package_info["hasAnimation"] !== "false";
-  $has_popup = (boolean)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "popup") !== false;
-  $is_custom_text = (boolean)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "NAME_TEXT") !== false;
-  $is_free_text = (boolean)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "PER_STICKER_TEXT") !== false;
+  $has_sound = (bool)($package_info["hasSound"] ?? false) && $package_info["hasSound"] !== "false" || (bool)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "sound") !== false;
+  $has_animation = (bool)($package_info["hasAnimation"] ?? false) && $package_info["hasAnimation"] !== "false";
+  $has_popup = (bool)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "popup") !== false;
+  $is_custom_text = (bool)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "NAME_TEXT") !== false;
+  $is_free_text = (bool)($package_info["stickerResourceType"] ?? false) && stristr($package_info["stickerResourceType"], "PER_STICKER_TEXT") !== false;
   // Devices array
   $profiles = array("iPhone", "android", "PC");
   // Each devices
