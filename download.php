@@ -313,8 +313,12 @@ function print_line($str) {
   if ($cli) {
     echo "$str".PHP_EOL;
   } else {
+    $message = json_encode($str, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+    if ($message === false) {
+      $message = '"[Invalid UTF-8 progress message]"';
+    }
     echo "    <!-- dummy data: ".str_pad("", 3600, "アイ！カツ！")." -->".PHP_EOL; // Send dummy to force browser to render
-    echo "    <script>document.getElementById('console').insertAdjacentHTML('beforeEnd', '".h($str)."<br>');</script>".PHP_EOL;
+    echo "    <script>document.getElementById('console').appendChild(document.createTextNode(".$message.")); document.getElementById('console').appendChild(document.createElement('br'));</script>".PHP_EOL;
     ob_flush();
     flush();
   }
