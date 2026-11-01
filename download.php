@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 // Include settings
 require_once __DIR__."/settings.php";
