@@ -6,7 +6,7 @@ It works in both browser-based and command-line environments.
 
 ## Features
 
-- Compatible with sound and animation stickers
+- Compatible with stickers having sound or animation
 - Can be used in Mod-PHP, CGI (browser), and CLI (terminal) environments
 
 ## Requirements
@@ -19,15 +19,19 @@ It works in both browser-based and command-line environments.
 
 `sudo apt install php-cli php-zip`
 
+### Homebrew example (CLI usage only)
+
+`brew install php`
+
 ## Installation
 
-### CGI and CLI
+### Usable via CGI or CLI
 
 1. Clone the repository, or download zip and extract it
 2. Deploy the entire directory to a web server (personal private server recommended)
-3. Give PHP permission to write in `caches` directory (0777 is fine)
+3. Give the PHP permission to write in the `caches` directory
 
-### CLI only
+### Usable by CLI only
 
 1. Clone the repository, or download zip and extract it
 
